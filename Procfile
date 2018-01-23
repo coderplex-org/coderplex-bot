@@ -1,1 +1,1 @@
-worker: yarn run prod:start
+worker: npm run prod:start
