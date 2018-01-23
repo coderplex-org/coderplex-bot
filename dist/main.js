@@ -22,16 +22,20 @@ Canister.on("message", (message) => __awaiter(this, void 0, void 0, function* ()
     const matched = message.content.match(/^!poll\s+?(.+)\s+?(\d)/i);
     console.log(message.content);
     if (matched && matched.index !== -1) {
+        console.log("matchec command!! :OOO SCREAMS");
         const pollQuestion = matched[1];
         const pollTimeout = parseInt(matched[2], 10);
         const embedOptions = {
             title: pollQuestion,
         };
         const embed = new discord_js_1.RichEmbed(embedOptions);
+        console.log("Trying stuff now");
         try {
+            console.log("SENDING POPCORN MESSAGES");
             const botMessage = yield message.channel.send("@everyone:", embed);
             const yesReaction = yield botMessage.react(THUMBS_UP);
             const noReaction = yield botMessage.react(THUMBS_DOWN);
+            console.log("POP MESSAGES SENT");
             if (message.deletable) {
                 message.delete();
             }
@@ -43,6 +47,7 @@ Canister.on("message", (message) => __awaiter(this, void 0, void 0, function* ()
             // setTimeout(() => {
             //   botMessage.delete();
             // }, pollTimeout * 1000);
+            console.log("TASK FINISHED");
         }
         catch (err) {
             console.error(err);
