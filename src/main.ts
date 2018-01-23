@@ -35,12 +35,10 @@ Canister.on("message", async (message: Message) => {
       });
       // setTimeout(() => {
       //   botMessage.delete();
-        
       // }, pollTimeout * 1000);
     } catch (err) {
       console.error(err);
     }
   }
 });
-
-Canister.login("NDAzMDQwMjk0MDMzMTYyMjQw.DUYDhA.7A1x8FSeqCi_2A06LVQ9hYWbkSU");
+Canister.login(process.env.BOT_TOKEN);
