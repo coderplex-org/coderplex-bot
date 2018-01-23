@@ -20,6 +20,7 @@ function allowThumbsOnly(reaction, user) {
 }
 Canister.on("message", (message) => __awaiter(this, void 0, void 0, function* () {
     const matched = message.content.match(/^!poll\s+?(.+)\s+?(\d)/i);
+    console.log(message.content);
     if (matched && matched.index !== -1) {
         const pollQuestion = matched[1];
         const pollTimeout = parseInt(matched[2], 10);

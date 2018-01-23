@@ -14,6 +14,7 @@ function allowThumbsOnly(reaction: MessageReaction, user: User) {
 
 Canister.on("message", async (message: Message) => {
   const matched = message.content.match(/^!poll\s+?(.+)\s+?(\d)/i);
+  console.log(message.content);
   if (matched && matched.index !== -1) {
     const pollQuestion: string = matched[1];
     const pollTimeout: number = parseInt(matched[2], 10);
