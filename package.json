@@ -9,7 +9,8 @@
     "start": "nodemon ./dist/main.js",
     "build": "gulp watch",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "prod:start": "node ./dist/main.js"
   },
   "dependencies": {
     "discord.js": "^11.3.0"
