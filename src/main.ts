@@ -13,7 +13,7 @@ function allowThumbsOnly(reaction: MessageReaction, user: User) {
 }
 
 Canister.on("message", async (message: Message) => {
-  const matched = message.content.match(/^!poll\s+?(.+)\s+?(\d)/i);
+  const matched = message.content.match(/^!poll\s+?(.+)/i); // \s+?(\d)
   console.log(message.content);
   if (matched && matched.index !== -1) {
     console.log("matchec command!! :OOO SCREAMS");
