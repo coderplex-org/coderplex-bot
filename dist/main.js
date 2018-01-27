@@ -9,43 +9,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const discord_js_1 = require("discord.js");
+const poll_1 = require("./commands/poll");
 const Canister = new discord_js_1.Client();
-const THUMBS_UP = "👍";
-const THUMBS_DOWN = "👎";
 Canister.on("ready", () => {
     console.log("I am ready!");
 });
-function allowThumbsOnly(reaction, user) {
-    return reaction.emoji.name === THUMBS_UP || reaction.emoji.name === THUMBS_DOWN;
-}
 Canister.on("message", (message) => __awaiter(this, void 0, void 0, function* () {
-    const matched = message.content.match(/^!poll\s+?(.+)/i); // \s+?(\d)
-    if (matched && matched.index !== -1) {
-        const pollQuestion = matched[1];
-        const pollTimeout = parseInt(matched[2], 10);
-        const embedOptions = {
-            title: pollQuestion,
-        };
-        const embed = new discord_js_1.RichEmbed(embedOptions);
-        try {
-            const botMessage = yield message.channel.send("@everyone:", embed);
-            const yesReaction = yield botMessage.react(THUMBS_UP);
-            const noReaction = yield botMessage.react(THUMBS_DOWN);
-            if (message.deletable) {
-                message.delete();
-            }
-            // Canister.on("messageReactionAdd", async (reaction: MessageReaction, { username }: User) => {
-            //   if (reaction.message.id === botMessage.id) {
-            //     console.log(`${username} has voted! total: ${reaction.count}`);
-            //   }
-            // });
-            // setTimeout(() => {
-            //   botMessage.delete();
-            // }, pollTimeout * 1000);
-        }
-        catch (err) {
-            console.error(err);
-        }
+    const pollMatch = message.content.match(/!poll\s+?(.+)/i); // \s+?(\d)
+    if (pollMatch && pollMatch.index !== -1) {
+        poll_1.default(pollMatch, message);
     }
 }));
-Canister.login(process.env.BOT_TOKEN);
+Canister.login("NDA2NzE2NDUzMjQ5ODc1OTc4.DU2_3Q.Rs1uan257S1JnU7WA2UniqKhHtc");
