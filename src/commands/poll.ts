@@ -40,7 +40,7 @@ const NUMBER_EMOJIES: string[] = [
 async function pollCommand(match: any[], message: Message) {
   const hasOptions: boolean = new RegExp("--options", "i").test(match[1]);
   const pollQuestion: string = hasOptions === true ? match[1].match(/(.+)--options.+/i)[1].trim() : match[1].trim(); // Extract question from the match
-  const pollOptions: string[] = hasOptions && match[1].match(/--options\s+?(.+)/i)[1].split(" ").slice(0, 5); // Extract poll options
+  const pollOptions: string[] = hasOptions && match[1].match(/--options\s+?(.+)/i)[1].split(";").slice(0, 5); // Extract poll options
   // const pollTimeout: number = parseInt(match[2], 10);
   const pollDescription: string = hasOptions ? pollOptions.reduce((acc: string, curr: string, currIndex: number) => {
     return acc += `${NUMBER_SYMBOLS[currIndex]} - ${curr}\n`;
