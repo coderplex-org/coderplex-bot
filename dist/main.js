@@ -20,4 +20,4 @@ Canister.on("message", (message) => __awaiter(this, void 0, void 0, function* ()
         poll_1.default(pollMatch, message);
     }
 }));
-Canister.login("NDA2NzE2NDUzMjQ5ODc1OTc4.DU2_3Q.Rs1uan257S1JnU7WA2UniqKhHtc");
+Canister.login(process.env.BOT_TOKEN);
