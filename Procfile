@@ -1,1 +1,1 @@
-worker: npm run prod:start
+web: node dist/main.js
