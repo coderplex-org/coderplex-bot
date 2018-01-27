@@ -5,6 +5,9 @@
   "repository": "https://github.com/buoyantair/canister.git",
   "author": "buoyantair <buoyantair@gmail.com>",
   "license": "MIT",
+  "engines": {
+    "node": "8.6.0"
+  },
   "scripts": {
     "start": "nodemon ./dist/main.js",
     "build": "gulp watch",
