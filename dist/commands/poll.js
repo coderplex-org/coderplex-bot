@@ -26,9 +26,9 @@ const NUMBER_EMOJIES = [
 ];
 function pollCommand(match, message) {
     return __awaiter(this, void 0, void 0, function* () {
-        const hasOptions = new RegExp("--options", "i").test(match[1]);
-        const pollQuestion = hasOptions === true ? match[1].match(/(.+)--options.+/i)[1].trim() : match[1].trim(); // Extract question from the match
-        const pollOptions = hasOptions && match[1].match(/--options\s+?(.+)/i)[1].split(";").slice(0, 5); // Extract poll options
+        const hasOptions = new RegExp("--options", "i").test(match[2]);
+        const pollQuestion = hasOptions === true ? match[2].match(/(.+)--options.+/i)[1].trim() : match[2].trim(); // Extract question from the match
+        const pollOptions = hasOptions && match[2].match(/--options\s+?(.+)/i)[1].split(";").slice(0, 5); // Extract poll options
         // const pollTimeout: number = parseInt(match[2], 10);
         const pollDescription = hasOptions ? pollOptions.reduce((acc, curr, currIndex) => {
             return acc += `${NUMBER_SYMBOLS[currIndex]} - ${curr}\n`;
@@ -43,7 +43,7 @@ function pollCommand(match, message) {
             if (hasOptions && pollOptions.length > 0) {
                 let currIndex = 0;
                 /**
-                 * Asynchronously add emojies!
+                 * add emojies!
                  */
                 function addEmoji() {
                     botMessage.react(NUMBER_EMOJIES[currIndex])
