@@ -14,9 +14,8 @@ const Canister = new discord_js_1.Client();
 Canister.on("ready", () => {
     console.log("I am ready!");
 });
-Canister.on("guildMemberAdd", (newUser) => {
-    const channel = newUser.guild.channels.find("name", "general");
-    console.log(channel.name);
+Canister.on("guildMemberAdd", (newUser) => __awaiter(this, void 0, void 0, function* () {
+    const channel = yield newUser.createDM();
     if (!channel) {
         return;
     }
@@ -42,7 +41,7 @@ Canister.on("guildMemberAdd", (newUser) => {
     //   Ask for help in respective channels! Participate in the community and most of all, learn and have fun!
     // `);
     channel.send(welcomeMessage);
-});
+}));
 Canister.on("message", (message) => __awaiter(this, void 0, void 0, function* () {
     const pollMatch = message.content.match(/!(poll|help)\s+?(.+)/i); // \s+?(\d)
     if (pollMatch && pollMatch.index !== -1) {

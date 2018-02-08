@@ -1,4 +1,4 @@
-import { Client, Message, GuildMember, TextChannel, GuildChannel } from "discord.js";
+import { Client, Message, GuildMember, TextChannel, GuildChannel, DMChannel } from "discord.js";
 
 import pollCommand from "./commands/poll";
 
@@ -8,9 +8,8 @@ Canister.on("ready", () => {
   console.log("I am ready!");
 });
 
-Canister.on("guildMemberAdd", (newUser: GuildMember) => {
-  const channel: TextChannel = newUser.guild.channels.find("name", "general") as TextChannel;
-  console.log(channel.name);
+Canister.on("guildMemberAdd", async (newUser: GuildMember) => {
+  const channel: DMChannel = await newUser.createDM();
   if (!channel) {
     return;
   }
