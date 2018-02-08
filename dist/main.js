@@ -41,6 +41,7 @@ Canister.on("guildMemberAdd", (newUser) => __awaiter(this, void 0, void 0, funct
     //   Ask for help in respective channels! Participate in the community and most of all, learn and have fun!
     // `);
     channel.send(welcomeMessage);
+    console.log(`Welcomed ${newUser.displayName}`);
 }));
 Canister.on("message", (message) => __awaiter(this, void 0, void 0, function* () {
     const pollMatch = message.content.match(/!(poll|help)\s+?(.+)/i); // \s+?(\d)

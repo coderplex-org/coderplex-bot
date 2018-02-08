@@ -39,6 +39,7 @@ Canister.on("guildMemberAdd", async (newUser: GuildMember) => {
   // `);
 
   channel.send(welcomeMessage);
+  console.log(`Welcomed ${newUser.displayName}`);
 });
 
 Canister.on("message", async (message: Message) => {
