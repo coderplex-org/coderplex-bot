@@ -1,2 +1,2 @@
-# canister
-Chat bot, for life.
+# Mr.Plex
+Coderplex Discord Chat bot, for life.
