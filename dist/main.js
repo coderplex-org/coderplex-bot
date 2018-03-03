@@ -9,7 +9,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const discord_js_1 = require("discord.js");
+const dotenv_1 = require("dotenv");
 const poll_1 = require("./commands/poll");
+dotenv_1.config();
 const Canister = new discord_js_1.Client();
 Canister.on("ready", () => {
     console.log("I am ready!");

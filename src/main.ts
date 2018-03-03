@@ -1,7 +1,9 @@
 import { Client, Message, GuildMember, TextChannel, GuildChannel, DMChannel } from "discord.js";
+import { config } from "dotenv";
 
 import pollCommand from "./commands/poll";
 
+config();
 const Canister = new Client();
 
 Canister.on("ready", () => {
