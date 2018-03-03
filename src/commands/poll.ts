@@ -69,11 +69,7 @@ async function pollCommand(match: any[], message: Message) {
             }
         });
       }
-
       addEmoji();
-
-      // pollOptions.forEach(async (option: string, index: number) => {
-      // });
     } else {
       const yesReaction: MessageReaction = await botMessage.react(THUMBS_UP);
       const noReaction: MessageReaction = await botMessage.react(THUMBS_DOWN);
@@ -81,14 +77,6 @@ async function pollCommand(match: any[], message: Message) {
     if (message.deletable) {
       message.delete();
     }
-    // Canister.on("messageReactionAdd", async (reaction: MessageReaction, { username }: User) => {
-    //   if (reaction.message.id === botMessage.id) {
-    //     console.log(`${username} has voted! total: ${reaction.count}`);
-    //   }
-    // });
-    // setTimeout(() => {
-    //   botMessage.delete();
-    // }, pollTimeout * 1000);
   } catch (err) {
     console.error(err);
   }

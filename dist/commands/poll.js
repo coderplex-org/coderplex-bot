@@ -55,8 +55,6 @@ function pollCommand(match, message) {
                     });
                 }
                 addEmoji();
-                // pollOptions.forEach(async (option: string, index: number) => {
-                // });
             }
             else {
                 const yesReaction = yield botMessage.react(constants_1.THUMBS_UP);
@@ -65,14 +63,6 @@ function pollCommand(match, message) {
             if (message.deletable) {
                 message.delete();
             }
-            // Canister.on("messageReactionAdd", async (reaction: MessageReaction, { username }: User) => {
-            //   if (reaction.message.id === botMessage.id) {
-            //     console.log(`${username} has voted! total: ${reaction.count}`);
-            //   }
-            // });
-            // setTimeout(() => {
-            //   botMessage.delete();
-            // }, pollTimeout * 1000);
         }
         catch (err) {
             console.error(err);

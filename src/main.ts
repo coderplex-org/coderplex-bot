@@ -9,45 +9,38 @@ Canister.on("ready", () => {
 });
 
 Canister.on("guildMemberAdd", async (newUser: GuildMember) => {
-  const channel: DMChannel = await newUser.createDM();
-  if (!channel) {
+  const dmChannel: DMChannel = await newUser.createDM();
+  const guildChannel: TextChannel = newUser.guild.channels.find("name", "introductions") as TextChannel;
+  if (!dmChannel || !guildChannel) {
     return;
   }
 
-  let welcomeMessage = `Welcome to Coderplex, <@${newUser.id}>!\n`;
-  welcomeMessage += "Coderplex is a non-profit organization that is working towards improving the state of tech in Hyderabad,\n";
-  welcomeMessage += "by building an active and vibrant developer community which provides support, motivation,\n";
-  welcomeMessage += "confidence and opportunities to all it’s members, so that each of them can progress in their careers\n";
-  welcomeMessage += "as software developers and engineers.\n";
-  welcomeMessage += "\n";
-  welcomeMessage += "Please introduce yourself in #introductions !\n";
-  welcomeMessage += "Talk about your goals, interests, and views on different technologies out there!\n";
-  welcomeMessage += "\n";
-  welcomeMessage += "Ask for help in respective channels! Participate in the community and most of all, learn and have fun!";
-  welcomeMessage += "\n";
-  // channel.send(`
-  //   Welcome to Coderplex, <@${newUser.id}>!
-  //   Coderplex is a non-profit organization that is working towards improving the state of tech in Hyderabad,
-  //   by building an active and vibrant developer community which provides support, motivation,
-  //   confidence and opportunities to all it’s members, so that each of them can progress in their careers
-  //   as software developers and engineers.
+  let dmWelcomeMessage = `Welcome to Coderplex, <@${newUser.id}>!\n`;
+  dmWelcomeMessage += "Coderplex is a non-profit organization that is working towards improving the state of tech in Hyderabad,\n";
+  dmWelcomeMessage += "by building an active and vibrant developer community which provides support, motivation,\n";
+  dmWelcomeMessage += "confidence and opportunities to all it’s members, so that each of them can progress in their careers\n";
+  dmWelcomeMessage += "as software developers and engineers.\n";
+  dmWelcomeMessage += "\n";
+  dmWelcomeMessage += "Please introduce yourself in #introductions !\n";
+  dmWelcomeMessage += "Talk about your goals, interests, and views on different technologies out there!\n";
+  dmWelcomeMessage += "\n";
+  dmWelcomeMessage += "Download the official Discord mobile app at https://discordapp.com/download to stay connected with the community and get notified on latest updates!!";
+  dmWelcomeMessage += "\n";
+  dmWelcomeMessage += "Ask for help in respective channels! Participate in the community and most of all, learn and have fun!";
 
-  //   Please introduce yourself in #introductions !
-  //   Talk about your goals, interests, and views on different technologies out there!
-    
-  //   Ask for help in respective channels! Participate in the community and most of all, learn and have fun!
-  // `);
+  let chWelcomeMessage = `Welcome to Coderplex, <@${newUser.id}>!\n`;
+  chWelcomeMessage += "Please introduce yourself to the community!";
 
-  channel.send(welcomeMessage);
-  console.log(`Welcomed ${newUser.displayName}`);
+  dmChannel.send(dmWelcomeMessage);
+  guildChannel.send(chWelcomeMessage);
 });
 
 Canister.on("message", async (message: Message) => {
-  const pollMatch = message.content.match(/!(poll|help)\s+?(.+)/i); // \s+?(\d)
-  if (pollMatch && pollMatch.index !== -1) {
-    switch (pollMatch[1]) {
+  const commandMatch = message.content.match(/!(poll|help)\s+?(.+)/i); // \s+?(\d)
+  if (commandMatch && commandMatch.index !== -1) {
+    switch (commandMatch[1]) {
       case "poll":
-        pollCommand(pollMatch, message);
+        pollCommand(commandMatch, message);
         break;
     }
   }
