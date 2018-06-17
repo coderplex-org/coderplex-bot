@@ -1,9 +1,7 @@
 import {
   Message,
-  MessageReaction,
   RichEmbed,
   RichEmbedOptions,
-  User,
 } from "discord.js";
 import {
   THUMBS_UP,
@@ -19,7 +17,6 @@ import {
   EMOJI_FOUR,
   EMOJI_FIVE,
 } from "../constants";
-import { strictEqual } from "assert";
 
 const NUMBER_SYMBOLS: string[] = [
   SYMBOL_ONE,
@@ -37,14 +34,31 @@ const NUMBER_EMOJIES: string[] = [
   EMOJI_FIVE,
 ];
 
-async function pollCommand(match: any[], message: Message) {
+async function handlePoll(match: any[], message: Message) {
+  const hasQuestion: boolean = match[2] !== undefined;
+  if (!hasQuestion) {
+    await message.channel.send(
+      ":panda_face: :raised_hand: Please enter a question after !poll, the format is `!poll QUESTION`, checkout `!help` for details.",
+    );
+    return;
+  }
   const hasOptions: boolean = new RegExp("--options", "i").test(match[2]);
-  const pollQuestion: string = hasOptions === true ? match[2].match(/(.+)--options.+/i)[1].trim() : match[2].trim(); // Extract question from the match
-  const pollOptions: string[] = hasOptions && match[2].match(/--options\s+?(.+)/i)[1].split(";").slice(0, 5); // Extract poll options
+  const pollQuestion: string =
+    hasOptions === true
+      ? match[2].match(/(.+)--options.+/i)[1].trim()
+      : match[2].trim(); // Extract question from the match
+  const pollOptions: string[] =
+    hasOptions &&
+    match[2]
+      .match(/--options\s+?(.+)/i)[1]
+      .split(";")
+      .slice(0, 5); // Extract poll options
   // const pollTimeout: number = parseInt(match[2], 10);
-  const pollDescription: string = hasOptions ? pollOptions.reduce((acc: string, curr: string, currIndex: number) => {
-    return acc += `${NUMBER_SYMBOLS[currIndex]} - ${curr}\n`;
-  }, "") : "";
+  const pollDescription: string = hasOptions
+    ? pollOptions.reduce((acc: string, curr: string, currIndex: number) => {
+        return (acc += `${NUMBER_SYMBOLS[currIndex]} - ${curr}\n`);
+      }, "")
+    : "";
   const embedOptions: RichEmbedOptions = {
     title: pollQuestion,
     description: pollDescription,
@@ -61,18 +75,17 @@ async function pollCommand(match: any[], message: Message) {
        * add emojies!
        */
       function addEmoji() {
-        botMessage.react(NUMBER_EMOJIES[currIndex])
-          .then(() => {
-            currIndex++;
-            if (currIndex < pollOptions.length) {
-              addEmoji();
-            }
+        botMessage.react(NUMBER_EMOJIES[currIndex]).then(() => {
+          currIndex++;
+          if (currIndex < pollOptions.length) {
+            addEmoji();
+          }
         });
       }
       addEmoji();
     } else {
-      const yesReaction: MessageReaction = await botMessage.react(THUMBS_UP);
-      const noReaction: MessageReaction = await botMessage.react(THUMBS_DOWN);
+      await botMessage.react(THUMBS_UP);
+      await botMessage.react(THUMBS_DOWN);
     }
     if (message.deletable) {
       message.delete();
@@ -82,4 +95,4 @@ async function pollCommand(match: any[], message: Message) {
   }
 }
 
-export default pollCommand;
+export default handlePoll;

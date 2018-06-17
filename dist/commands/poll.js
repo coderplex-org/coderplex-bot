@@ -24,15 +24,28 @@ const NUMBER_EMOJIES = [
     constants_1.EMOJI_FOUR,
     constants_1.EMOJI_FIVE,
 ];
-function pollCommand(match, message) {
+function handlePoll(match, message) {
     return __awaiter(this, void 0, void 0, function* () {
+        const hasQuestion = match[2] !== undefined;
+        if (!hasQuestion) {
+            yield message.channel.send(":panda_face: :raised_hand: Please enter a question after !poll, the format is `!poll QUESTION`, checkout `!help` for details.");
+            return;
+        }
         const hasOptions = new RegExp("--options", "i").test(match[2]);
-        const pollQuestion = hasOptions === true ? match[2].match(/(.+)--options.+/i)[1].trim() : match[2].trim(); // Extract question from the match
-        const pollOptions = hasOptions && match[2].match(/--options\s+?(.+)/i)[1].split(";").slice(0, 5); // Extract poll options
+        const pollQuestion = hasOptions === true
+            ? match[2].match(/(.+)--options.+/i)[1].trim()
+            : match[2].trim(); // Extract question from the match
+        const pollOptions = hasOptions &&
+            match[2]
+                .match(/--options\s+?(.+)/i)[1]
+                .split(";")
+                .slice(0, 5); // Extract poll options
         // const pollTimeout: number = parseInt(match[2], 10);
-        const pollDescription = hasOptions ? pollOptions.reduce((acc, curr, currIndex) => {
-            return acc += `${NUMBER_SYMBOLS[currIndex]} - ${curr}\n`;
-        }, "") : "";
+        const pollDescription = hasOptions
+            ? pollOptions.reduce((acc, curr, currIndex) => {
+                return (acc += `${NUMBER_SYMBOLS[currIndex]} - ${curr}\n`);
+            }, "")
+            : "";
         const embedOptions = {
             title: pollQuestion,
             description: pollDescription,
@@ -46,8 +59,7 @@ function pollCommand(match, message) {
                  * add emojies!
                  */
                 function addEmoji() {
-                    botMessage.react(NUMBER_EMOJIES[currIndex])
-                        .then(() => {
+                    botMessage.react(NUMBER_EMOJIES[currIndex]).then(() => {
                         currIndex++;
                         if (currIndex < pollOptions.length) {
                             addEmoji();
@@ -57,8 +69,8 @@ function pollCommand(match, message) {
                 addEmoji();
             }
             else {
-                const yesReaction = yield botMessage.react(constants_1.THUMBS_UP);
-                const noReaction = yield botMessage.react(constants_1.THUMBS_DOWN);
+                yield botMessage.react(constants_1.THUMBS_UP);
+                yield botMessage.react(constants_1.THUMBS_DOWN);
             }
             if (message.deletable) {
                 message.delete();
@@ -69,4 +81,4 @@ function pollCommand(match, message) {
         }
     });
 }
-exports.default = pollCommand;
+exports.default = handlePoll;

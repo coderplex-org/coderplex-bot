@@ -10,41 +10,26 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const discord_js_1 = require("discord.js");
 const dotenv_1 = require("dotenv");
+const handleNewMember_1 = require("./events/handleNewMember");
 const poll_1 = require("./commands/poll");
+const help_1 = require("./commands/help");
 dotenv_1.config();
 const Canister = new discord_js_1.Client();
+// Once the bot is ready, log to the console :)
 Canister.on("ready", () => {
     console.log("I am ready!");
 });
-Canister.on("guildMemberAdd", (newUser) => __awaiter(this, void 0, void 0, function* () {
-    const dmChannel = yield newUser.createDM();
-    const guildChannel = newUser.guild.channels.find("name", "introductions");
-    if (!dmChannel || !guildChannel) {
-        return;
-    }
-    let dmWelcomeMessage = `Welcome to Coderplex, <@${newUser.id}>!\n`;
-    dmWelcomeMessage += "Coderplex is a non-profit organization that is working towards improving the state of tech in Hyderabad,\n";
-    dmWelcomeMessage += "by building an active and vibrant developer community which provides support, motivation,\n";
-    dmWelcomeMessage += "confidence and opportunities to all it’s members, so that each of them can progress in their careers\n";
-    dmWelcomeMessage += "as software developers and engineers.\n";
-    dmWelcomeMessage += "\n";
-    dmWelcomeMessage += "Please introduce yourself in #introductions !\n";
-    dmWelcomeMessage += "Talk about your goals, interests, and views on different technologies out there!\n";
-    dmWelcomeMessage += "\n";
-    dmWelcomeMessage += "Download the official Discord mobile app at https://discordapp.com/download to stay connected with the community and get notified on latest updates!!";
-    dmWelcomeMessage += "\n";
-    dmWelcomeMessage += "Ask for help in respective channels! Participate in the community and most of all, learn and have fun!";
-    let chWelcomeMessage = `Welcome to Coderplex, <@${newUser.id}>!\n`;
-    chWelcomeMessage += "Please introduce yourself to the community!";
-    dmChannel.send(dmWelcomeMessage);
-    guildChannel.send(chWelcomeMessage);
-}));
+Canister.on("guildMemberAdd", handleNewMember_1.default);
 Canister.on("message", (message) => __awaiter(this, void 0, void 0, function* () {
-    const commandMatch = message.content.match(/!(poll|help)\s+?(.+)/i); // \s+?(\d)
+    const commandMatch = message.content.match(/^!(poll|help)(\s+?(.+))?/i); // \s+?(\d)
+    console.log(commandMatch);
     if (commandMatch && commandMatch.index !== -1) {
         switch (commandMatch[1]) {
             case "poll":
                 poll_1.default(commandMatch, message);
+                break;
+            case "help":
+                help_1.default(commandMatch, message);
                 break;
         }
     }
