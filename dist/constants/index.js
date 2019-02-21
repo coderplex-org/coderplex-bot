@@ -24,3 +24,4 @@ const EMOJI_FOUR = "4%E2%83%A3";
 exports.EMOJI_FOUR = EMOJI_FOUR;
 const EMOJI_FIVE = "5%E2%83%A3";
 exports.EMOJI_FIVE = EMOJI_FIVE;
+//# sourceMappingURL=index.js.map
