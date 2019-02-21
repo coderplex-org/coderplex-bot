@@ -5,6 +5,10 @@
   "repository": "https://github.com/buoyantair/canister.git",
   "author": "buoyantair <buoyantair@protonmail.com>",
   "license": "MIT",
+  "engines": {
+    "node": "11.x",
+    "npm": "6.x"
+  },
   "scripts": {
     "dev:start": "npx nodemon ./dist/main.js",
     "dev:build": "npx tsc -w",
