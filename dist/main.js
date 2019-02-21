@@ -38,4 +38,3 @@ Canister.on("message", (message) => __awaiter(this, void 0, void 0, function* ()
     }
 }));
 Canister.login(process.env.BOT_TOKEN);
-//# sourceMappingURL=main.js.map

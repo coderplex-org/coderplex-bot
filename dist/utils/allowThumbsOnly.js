@@ -12,4 +12,3 @@ function allowThumbsOnly(reaction, user) {
     return reaction.emoji.name === constants_1.THUMBS_UP || reaction.emoji.name === constants_1.THUMBS_DOWN;
 }
 exports.default = allowThumbsOnly;
-//# sourceMappingURL=allowThumbsOnly.js.map

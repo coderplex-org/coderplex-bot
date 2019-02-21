@@ -40,4 +40,3 @@ function handleNewMember(newUser) {
     });
 }
 exports.default = handleNewMember;
-//# sourceMappingURL=handleNewMember.js.map

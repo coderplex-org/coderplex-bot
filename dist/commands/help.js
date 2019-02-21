@@ -16,4 +16,3 @@ function handleHelp(match, message) {
     message.channel.send(embed);
 }
 exports.default = handleHelp;
-//# sourceMappingURL=help.js.map

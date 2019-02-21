@@ -82,4 +82,3 @@ function handlePoll(match, message) {
     });
 }
 exports.default = handlePoll;
-//# sourceMappingURL=poll.js.map
