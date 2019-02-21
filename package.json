@@ -6,10 +6,11 @@
   "author": "buoyantair <buoyantair@protonmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon ./dist/main.js",
-    "build": "gulp watch",
-    "test": "jest",
-    "test:watch": "jest --watch",
+    "start": "npx nodemon ./dist/main.js",
+    "build": "npx gulp watch",
+    "test": "npx jest",
+    "test:watch": "npx jest --watch",
+    "prod:build":"npx gulp",
     "prod:start": "node ./dist/main.js"
   },
   "dependencies": {
