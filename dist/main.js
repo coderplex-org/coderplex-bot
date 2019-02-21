@@ -31,6 +31,9 @@ Canister.on("message", (message) => __awaiter(this, void 0, void 0, function* ()
             case "help":
                 help_1.default(commandMatch, message);
                 break;
+            // default:
+            //   handleDefault();
+            //   break;
         }
     }
 }));

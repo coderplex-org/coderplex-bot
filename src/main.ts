@@ -1,7 +1,4 @@
-import {
-  Client,
-  Message,
-} from "discord.js";
+import { Client, Message } from "discord.js";
 import { config } from "dotenv";
 
 import handleNewMember from "./events/handleNewMember";
@@ -35,4 +32,5 @@ Canister.on("message", async (message: Message) => {
     }
   }
 });
+
 Canister.login(process.env.BOT_TOKEN);

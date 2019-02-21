@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "dist/main.js",
   "repository": "https://github.com/buoyantair/canister.git",
-  "author": "buoyantair <buoyantair@gmail.com>",
+  "author": "buoyantair <buoyantair@protonmail.com>",
   "license": "MIT",
   "scripts": {
     "start": "nodemon ./dist/main.js",
