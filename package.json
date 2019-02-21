@@ -14,8 +14,8 @@
     "dev:build": "npx tsc -w",
     "test": "npx jest",
     "test:watch": "npx jest --watch",
-    "prod:build": "npx tsc",
-    "prod:start": "node ./dist/main.js"
+    "start": "node ./dist/main.js",
+    "postinstall": "tsc --sourceMap false"
   },
   "dependencies": {
     "discord.js": "^11.3.2",
