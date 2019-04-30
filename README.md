@@ -4,6 +4,7 @@ Coderplex  Bot uses basic AI to track all the messages that are exchanged in our
 
 ## Requirements
 
+- Basic NLP, Machine Learning
 - NodeJS & NPM/Yarn
 - Typescript
 
