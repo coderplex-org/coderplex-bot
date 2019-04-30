@@ -1,6 +1,6 @@
 # Coderplex Bot
 
-Coderplex  Bot uses basic AI to track all the messages that are exchanged in our community chatroom, and then uses the information as a input to evaluate the expertise and helpful of each member in our community, awarding them points accordingly on their profile
+Coderplex  Bot uses basic AI to track all the messages that are exchanged in our [community chatroom](https://chat.coderplex.org), and  uses this information as a input to evaluate the expertise and helpfulness of each member in our community, awarding them points accordingly on their profile.
 
 ## Requirements
 
