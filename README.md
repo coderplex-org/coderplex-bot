@@ -1,6 +1,6 @@
-# Mr.Plex
+# Coderplex Bot
 
-Coderplex Discord Chat bot, for life.
+Coderplex Chat Bot is a bot that keeps track of all the messages that are exchanged in our community chatroom, and used the information as a input to evaluate the expertise and helpful of members in our community, awarding them points accordingly
 
 ## Requirements
 
